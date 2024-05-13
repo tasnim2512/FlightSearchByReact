@@ -10,7 +10,8 @@ After installing npm run
 ### `npm start`
 
 This will autometically load the page on [http://localhost:3000](http://localhost:3000) in browser.
-
+### Output
+![alt text](./images/output.png)
 ### Best practices for this project
 - **Component Structure** :  The code is organized into separate component files under the components and FormComponents directories to promote reusability and separation of concerns.React functional components are used for their simplicity and performance benefits over class-based components.
 
