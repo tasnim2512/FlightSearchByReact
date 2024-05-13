@@ -3,10 +3,12 @@ import flightData from '../LHR_CDG_ADT1_TYPE_1.json';
 
 function TableData() {
     const flights = flightData.flightOffer;
+    // Implenting Function to format date as expected result
 
-    // Helper function to format date and time
     const formatDateTime = (dateTimeStr) => {
-        return new Date(dateTimeStr).toLocaleString();
+        if (!dateTimeStr) return "--";
+        const date = new Date(dateTimeStr);
+        return date.toISOString().slice(0, 19); 
     };
     return (
         <table className="table w-full text-sm text-gray-500 mt-6 mb-10">
@@ -24,8 +26,10 @@ function TableData() {
                 </tr>
             </thead>
             <tbody>
+                {/* Pursing data through map */}
+                {/* Implenting logic based on index to keep the background color of each row according to expected result */}
                 {flights.map((offer, index) => (
-                    <tr className={`border-b border-gray-600 ${index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-300'}`} key={index}>
+                    <tr className={`border-b border-red-600 ${index % 2 === 0 ? 'bg-lightgray3' : 'bg-lightGray2'}`} key={index}>
                         <td className='py-2'>
                             {offer.itineraries[0].segments.map((segment, idx) => (
                                 <div key={idx}>{segment.flightNumber}</div>
@@ -58,11 +62,18 @@ function TableData() {
                         </td>
                         <td className='py-2'>
                             {offer.itineraries[0].segments.map((segment, idx) => (
-                                <div key={idx}>{formatDateTime(segment.arrival.at)}</div>
+                                <div key={idx}>
+                                    {formatDateTime(segment.arrival.at)}
+                                    <span className='ml-10'> --</span>
+                                </div>
                             ))}
                         </td>
                         <td className='py-2'>{offer.itineraries[0].duration}</td>
-                        <td className='py-2'>${offer.price}</td>
+                        <td className='pt-2'>${offer.price}
+                            <div className="">
+                                <button className="uppercase border px-4 py-2 rounded bg-darkBlue2 text-white text-xs">Select</button>
+                            </div>
+                        </td>
                     </tr>
                 ))}
             </tbody>
